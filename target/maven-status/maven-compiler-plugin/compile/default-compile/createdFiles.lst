@@ -1,0 +1,15 @@
+JavaClasses\FelhasznaloLista.class
+JavaClasses\DolgozatLista.class
+Entities\Felhasznalo.class
+com\mycompany\tdk_lebonyolito_web_app\JakartaRestConfiguration.class
+JavaClasses\Dolgozat.class
+Entities\Dolgozat.class
+com\mycompany\tdk_lebonyolito_web_app\resources\JakartaEE10Resource.class
+Entities\Diak.class
+JavaClasses\DolgozatDAO.class
+JavaClasses\Felhasznalo.class
+JavaClasses\Diak.class
+JavaClasses\JelszoTitkositas.class
+JavaClasses\DiakDAO.class
+JavaClasses\FelhasznaloDAO.class
+JavaClasses\Regisztralas.class
