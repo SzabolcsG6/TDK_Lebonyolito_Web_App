@@ -15,6 +15,7 @@
         <div id="menu">
             <ul>
                 <li><a href="/">Hírek</a></li>
+                  <li><a href="/program">Program</a></li>
                 <li><a href="/szakosztalyok">Szakosztályok</a></li>
                 <li><a href="/dokumentumok">Dokumentumok</a></li>
                 <li><a href="/feltetelek">Feltételek</a></li>

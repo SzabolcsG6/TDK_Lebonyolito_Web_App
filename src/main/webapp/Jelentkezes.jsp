@@ -5,9 +5,72 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page import="java.sql.*, java.io.*, java.util.*, javax.mail.*, javax.mail.internet.*, javax.naming.*, javax.activation.*" %>
-<%--<%@ page import="JavaClasses.EmailKuldo" %>
-<%@ page import="JavaClasses.AdatbazisKezelo" %>--%>
+<%@ page import="JavaClasses.AdatbazisKezelo, java.sql.*, java.io.*, java.util.*" %>
+
+<%
+    String errorMessage = "";
+    String successMessage = "";
+    
+    if ("POST".equalsIgnoreCase(request.getMethod())) {
+        String action = request.getParameter("action");
+
+        if ("login".equalsIgnoreCase(action)) {
+            String email = request.getParameter("mail");
+            String password = request.getParameter("passw");
+
+            if (email != null && password != null) {
+                Connection conn = null;
+                PreparedStatement stmt = null;
+                ResultSet rs = null;
+                try {
+                    conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydatabase", "root", "xR26.BDezso");
+                    String sql = "SELECT * FROM felhasznalok WHERE email = ? AND jelszo = ?";
+                    stmt = conn.prepareStatement(sql);
+                    stmt.setString(1, email);
+                    stmt.setString(2, password);
+                    rs = stmt.executeQuery();
+
+                    if (rs.next()) {
+                        // Login successful
+                        successMessage = "Login successful!";
+                    } else {
+                        // Login failed
+                        errorMessage = "Invalid email or password.";
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    errorMessage = "Database error.";
+                } finally {
+                    if (rs != null) try { rs.close(); } catch (SQLException e) { e.printStackTrace(); }
+                    if (stmt != null) try { stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
+                    if (conn != null) try { conn.close(); } catch (SQLException e) { e.printStackTrace(); }
+                }
+            } else {
+                errorMessage = "Please fill in all fields.";
+            }
+        } else if ("register".equalsIgnoreCase(action)) {
+            String name = request.getParameter("name");
+            String email = request.getParameter("mail");
+            String password = request.getParameter("password");
+            String password2 = request.getParameter("password2");
+            String university = request.getParameter("univers");
+            String department = request.getParameter("department");
+            String profile = request.getParameter("profile");
+            String year = request.getParameter("year");
+
+            if (password.equals(password2)) {
+                boolean success = AdatbazisKezelo.felhasznaloHozzaadas(name, email, password, university, department, profile, year);
+                if (success) {
+                    successMessage = "Registration successful!";
+                } else {
+                    errorMessage = "Registration failed.";
+                }
+            } else {
+                errorMessage = "Passwords do not match.";
+            }
+        }
+    }
+%>
 
 <!doctype html>
 <html lang="hu">
@@ -53,7 +116,7 @@ function recap_callback() {
                         			<div class="header"></div>
 			<div class="menu">
 				<ul>
-				<li><a href="Hirek.jsp" >Hírek</a></li><li><a href="Szakosztalyok.jsp" >Szakosztályok</a></li><li><a href="Formai_Kovetelmenyek.jsp" >Formai követelmények</a></li><li><a href="Dokumentumok.jsp" >Dokumentumok</a></li><li><a href="Jelentkezes.jsp" >Jelentkezés</a></li><li><a href="Archivum.jsp" >Archívum</a></li><li class="active"><a href="Ro.jsp" >Ro</a></li><li><a href="Eng.jsp" >Eng</a></li>					
+				<li><a href="Hirek.jsp" >Hírek</a></li> <li><a href="Program.jsp">Program</a></li><li><a href="Szakosztalyok.jsp" >Szakosztályok</a></li><li><a href="Formai_Kovetelmenyek.jsp" >Formai követelmények</a></li><li><a href="Dokumentumok.jsp" >Dokumentumok</a></li> <li class="active"><a href="Jelentkezes.jsp" >Jelentkezés</a></li><li><a href="Archivum.jsp" >Archívum</a></li><li><a href="Ro.jsp" >Ro</a></li><li><a href="Eng.jsp" >Eng</a></li>					
 					<!-- <li class="active"><a href="#" >aktiv menü</a></li> -->
 				</ul>
 			</div>
@@ -71,7 +134,7 @@ function recap_callback() {
                     <input class="inp" type = "password" name = "passw" id ="passw" placelholder="Jelszó" required />
                     <!-- div id="cap1" style="margin-top:10px;" class="g-recaptcha" ></div -->
                     <input type="submit" value ="Belépés" class="cap1btn btn btn-default btn-sm fr" style="margin-top: 10px;" />
-                    <a style="float:left; display: inline-block; margin-top: 17px" href = "https://mtdk.tmd.ro/index.php/site/apply/?s=passw_res">Elfelejtettem a jelszavam.</a>
+                    <a style="float:left; display: inline-block; margin-top: 17px" href = "JelszoVisszaallitas.jsp">Elfelejtettem a jelszavam.</a>
                     <div class="cb"></div>
             </form>
         </div>

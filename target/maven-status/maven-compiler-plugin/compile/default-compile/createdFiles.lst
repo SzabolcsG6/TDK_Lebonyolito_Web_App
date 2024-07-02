@@ -6,6 +6,7 @@ JavaClasses\Dolgozat.class
 Entities\Dolgozat.class
 com\mycompany\tdk_lebonyolito_web_app\resources\JakartaEE10Resource.class
 Entities\Diak.class
+JavaClasses\AdatbazisKezelo.class
 JavaClasses\DolgozatDAO.class
 JavaClasses\Felhasznalo.class
 JavaClasses\Diak.class

@@ -46,7 +46,7 @@ function recap_callback() {
                                 			<div class="header"></div>
 			<div class="menu">
 				<ul>
-				<li><a href="Hirek.jsp" >Hírek</a></li><li><a href="Szakosztalyok.jsp" >Szakosztályok</a></li><li><a href="Formai_Kovetelmenyek.jsp" >Formai követelmények</a></li><li><a href="Dokumentumok.jsp" >Dokumentumok</a></li><li><a href="Jelentkezes.jsp" >Jelentkezés</a></li><li><a href="Archivum.jsp" >Archívum</a></li><li class="active"><a href="Ro.jsp" >Ro</a></li><li><a href="Eng.jsp" >Eng</a></li>					
+				<li><a href="Hirek.jsp" >Hírek</a></li><li><a href="Program.jsp">Program</a></li><li><a href="Szakosztalyok.jsp" >Szakosztályok</a></li><li><a href="Formai_Kovetelmenyek.jsp" >Formai követelmények</a></li><li><a href="Dokumentumok.jsp" >Dokumentumok</a></li><li><a href="Jelentkezes.jsp" >Jelentkezés</a></li><li class="active"><a href="Dolgozatok.jsp">Dolgozatok</a></li><li><a href="Archivum.jsp" >Archívum</a></li><li><a href="Ro.jsp" >Ro</a></li><li><a href="Eng.jsp" >Eng</a></li>					
 					<!-- <li class="active"><a href="#" >aktiv menü</a></li> -->
 				</ul>
 			</div>
