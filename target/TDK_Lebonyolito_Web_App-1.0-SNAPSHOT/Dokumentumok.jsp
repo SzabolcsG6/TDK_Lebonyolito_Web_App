@@ -40,8 +40,8 @@ function recap_callback() {
 		<div class="header-container">
                   
                                                         <div class='logged-in-user'>
-                                    <span style="color:white;">Üdvözlünk, Próba!
-                                         <a style="color:white;" href = "https://mtdk.tmd.ro/index.php/site/logout/">(Kilépés)</a>
+                                    <span style="color:white;">
+                                         <a style="color:white;" href = "https://mtdk.tmd.ro/index.php/site/logout/"></a>
                                     </span>
                                 </div>
                                 			<div class="header"></div>

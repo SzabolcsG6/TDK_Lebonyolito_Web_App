@@ -35,9 +35,16 @@ public class Dolgozat {
         this.elfogadva = false; // Alapértelmezetten false
         this.jegy = 1L;//alapertelmezetten 1
     }
-    public Dolgozat(){
-        
+     public Dolgozat(List<Diak> szerzok, String cim, String kategoria){
+         this.DolgozatId=nextDolgozatId++;
+        this.szerzok = szerzok;
+        this.cim = cim;
+        this.kategoria = kategoria;
     }
+    public Dolgozat(){
+        this.DolgozatId=nextDolgozatId++;
+    }
+   
 public int getDolgozatId() {
         return DolgozatId;
     }
