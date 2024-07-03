@@ -19,6 +19,9 @@
             <version>${jakartaee}</version>
             <scope>provided</scope>
         </dependency>
+       
+
+
         <dependency>
             <groupId>org.tomitribe.jkta</groupId>
             <artifactId>jkta</artifactId>

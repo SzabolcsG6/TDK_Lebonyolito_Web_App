@@ -1,5 +1,6 @@
 JavaClasses\FelhasznaloLista.class
 JavaClasses\DolgozatLista.class
+JavaClasses\DiakServlet.class
 Entities\Felhasznalo.class
 com\mycompany\tdk_lebonyolito_web_app\JakartaRestConfiguration.class
 JavaClasses\Dolgozat.class

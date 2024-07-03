@@ -15,7 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DiakDAO {
-    private final String url = "jdbc:mysql://localhost:3306/mysql";
+    private final String url = "jdbc:mysql://localhost:3306/mydatabase";
     private final String user = "root";
     private final String password = "xR26.BDezso";
 
