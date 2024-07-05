@@ -4,7 +4,7 @@
     Author     : misim
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="JavaClasses.DiakServlet,JavaClasses.AdatbazisKezelo,JavaClasses.Diak,JavaClasses.DiakDAO, java.sql.*, java.io.*, java.util.*" %>
 
 <%
@@ -65,42 +65,10 @@
             <h1 id="jelentkezes">Jelentkezés</h1>
             <div class="cb"></div>
             <div class="login-col">
-                <form method="post" action="DiakServlet" class="login_form">
-                    <input type="hidden" name="action" value="login">
-                    <h3>Bejelentkezés</h3>
-                    <label>E-mail cím:</label>
-                    <input class="inp" type="text" name="mail" id="mail" placeholder="E-mail cím" required />
-                    <label>Jelszó:</label>
-                    <input class="inp" type="password" name="passw" id="passw" placeholder="Jelszó" required />
-                    <input type="submit" value="Belépés" class="cap1btn btn btn-default btn-sm fr" style="margin-top: 10px;" />
-                    <a style="float:left; display: inline-block; margin-top: 17px" href="JelszoVisszaallitas.jsp">Elfelejtettem a jelszavam.</a>
-                    <div class="cb"></div>
-                </form>
+                <%@ include file="/WEB-INF/jspf/Bejelentkezes.jspf" %>
             </div>
             <div class="signup-col">
-                <form method="post" action="DiakServlet" class="login_form">
-                    <input type="hidden" name="action" value="register">
-                    <h3>Regisztráció</h3>
-                    <label>Név:</label>
-                    <input class="inp" autocomplete="off" type="text" name="name" id="name" placeholder="Név" required />
-                    <label>E-mail cím:</label>
-                    <input class="inp" autocomplete="off" type="text" name="mail" id="mail" placeholder="E-mail cím" required />
-                    <label>Jelszó:</label>
-                    <input class="inp" autocomplete="off" type="password" name="password" id="password" placeholder="Jelszó" required />
-                    <label>Jelszó újra:</label>
-                    <input class="inp" autocomplete="off" type="password" name="password2" id="password2" placeholder="Jelszó újra" required />
-                    <label>Egyetem:</label>
-                    <input class="inp" autocomplete="off" type="text" name="univers" id="univers" placeholder="Egyetem" required />
-                    <label>Kar:</label>
-                    <input class="inp" autocomplete="off" type="text" name="department" id="department" placeholder="Kar" required />
-                    <label>Szak:</label>
-                    <input class="inp" autocomplete="off" type="text" name="profile" id="profile" placeholder="Szak" required />
-                    <label>Évfolyam:</label>
-                    <input class="inp" autocomplete="off" type="text" name="year" id="year" placeholder="Évfolyam(1-4)" required />
-                    <div id="cap2" style="margin-top:10px;" class="g-recaptcha"></div>
-                    <input type="submit" value="Regisztráció" class="cap2btn btn btn-default btn-sm fr" style="margin-top: 10px;" />
-                    <div class="cb"></div>
-                </form>
+                <%@ include file="/WEB-INF/jspf/Regisztracio.jspf" %>
             </div>
             <div class="cb"></div>
         </div>

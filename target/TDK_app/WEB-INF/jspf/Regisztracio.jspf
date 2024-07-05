@@ -1,0 +1,24 @@
+<!-- Regisztracio.jspf -->
+<form method="post" action="DiakServlet" class="login_form">
+    <input type="hidden" name="action" value="register">
+    <h3>Regisztráció</h3>
+    <label>Név:</label>
+    <input class="inp" autocomplete="off" type="text" name="name" id="name" placeholder="Név" required />
+    <label>E-mail cím:</label>
+    <input class="inp" autocomplete="off" type="text" name="mail" id="mail" placeholder="E-mail cím" required />
+    <label>Jelszó:</label>
+    <input class="inp" autocomplete="off" type="password" name="password" id="password" placeholder="Jelszó" required />
+    <label>Jelszó újra:</label>
+    <input class="inp" autocomplete="off" type="password" name="password2" id="password2" placeholder="Jelszó újra" required />
+    <label>Egyetem:</label>
+    <input class="inp" autocomplete="off" type="text" name="univers" id="univers" placeholder="Egyetem" required />
+    <label>Kar:</label>
+    <input class="inp" autocomplete="off" type="text" name="department" id="department" placeholder="Kar" required />
+    <label>Szak:</label>
+    <input class="inp" autocomplete="off" type="text" name="profile" id="profile" placeholder="Szak" required />
+    <label>Évfolyam:</label>
+    <input class="inp" autocomplete="off" type="text" name="year" id="year" placeholder="Évfolyam(1-4)" required />
+    <div id="cap2" style="margin-top:10px;" class="g-recaptcha"></div>
+    <input type="submit" value="Regisztráció" class="cap2btn btn btn-default btn-sm fr" style="margin-top: 10px;" />
+    <div class="cb"></div>
+</form>

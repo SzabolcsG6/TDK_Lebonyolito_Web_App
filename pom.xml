@@ -46,6 +46,13 @@
     <version>5.0.0</version>
 </dependency>
 
+<dependency>
+    <groupId>org.apache.tomcat</groupId>
+    <artifactId>jsp-api</artifactId>
+    <version>6.0.53</version>
+</dependency>
+
+
         <dependency>
             <groupId>org.tomitribe.jkta</groupId>
             <artifactId>jkta</artifactId>
@@ -61,6 +68,7 @@
     </dependencies>
     
     <build>
+        <finalName>TDK_app</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

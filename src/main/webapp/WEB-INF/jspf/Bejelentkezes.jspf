@@ -1,0 +1,12 @@
+<!-- Bejelentkezes.jspf -->
+<form method="post" action="DiakServlet" class="login_form">
+    <input type="hidden" name="action" value="login">
+    <h3>Bejelentkezés</h3>
+    <label>E-mail cím:</label>
+    <input class="inp" type="text" name="mail" id="mail" placeholder="E-mail cím" required />
+    <label>Jelszó:</label>
+    <input class="inp" type="password" name="passw" id="passw" placeholder="Jelszó" required />
+    <input type="submit" value="Belépés" class="cap1btn btn btn-default btn-sm fr" style="margin-top: 10px;" />
+    <a style="float:left; display: inline-block; margin-top: 17px" href="JelszoVisszaallitas.jsp">Elfelejtettem a jelszavam.</a>
+    <div class="cb"></div>
+</form>
