@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page import="JavaClasses.AdatbazisKezelo,JavaClasses.Diak,JavaClasses.DiakDAO, java.sql.*, java.io.*, java.util.*" %>
+<%@ page import="JavaClasses.DiakServlet,JavaClasses.AdatbazisKezelo,JavaClasses.Diak,JavaClasses.DiakDAO, java.sql.*, java.io.*, java.util.*" %>
 
 <%
     String errorMessage = "";

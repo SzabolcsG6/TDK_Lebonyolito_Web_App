@@ -8,6 +8,7 @@ package JavaClasses;
  *
  * @author misim
  */
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -48,14 +49,15 @@ public class DiakDAO {
         }
     }
 
-    public Diak getDiakById(int id) {
+    public Diak getDiakByEmailAndPassword(String email, String password) {
         Diak diak = null;
-        String sql = "SELECT * FROM diak WHERE id = ?";
-//persistence
-        try (Connection conn = DriverManager.getConnection(url, user, password);
+        String sql = "SELECT * FROM diak WHERE email = ? AND jelszo = ?";
+
+        try (Connection conn = DriverManager.getConnection(url, user, this.password);
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setInt(1, id);
+            stmt.setString(1, email);
+            stmt.setString(2, password);
             ResultSet resultSet = stmt.executeQuery();
 
             if (resultSet.next()) {

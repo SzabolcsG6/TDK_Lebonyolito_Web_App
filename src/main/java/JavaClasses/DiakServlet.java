@@ -15,10 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/DiakServlet")
 public class DiakServlet extends HttpServlet {
-
-    private final String url = "jdbc:mysql://localhost:3306/mydatabase";
-    private final String user = "root";
-    private final String password = "xR26.BDezso";
+    private DiakDAO diakDAO = new DiakDAO();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -47,21 +44,11 @@ public class DiakServlet extends HttpServlet {
         String password = request.getParameter("passw");
 
         if (email != null && password != null) {
-            try (Connection conn = DriverManager.getConnection(url, user, this.password);
-                 PreparedStatement stmt = conn.prepareStatement("SELECT * FROM diak WHERE email = ? AND jelszo = ?")) {
-
-                stmt.setString(1, email);
-                stmt.setString(2, password);
-                try (ResultSet rs = stmt.executeQuery()) {
-                    if (rs.next()) {
-                        out.println("Login successful!");
-                    } else {
-                        out.println("Invalid email or password.");
-                    }
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-                out.println("Database error: " + e.getMessage());
+            Diak diak = diakDAO.getDiakByEmailAndPassword(email, password);
+            if (diak != null) {
+                out.println("Login successful!");
+            } else {
+                out.println("Invalid email or password.");
             }
         } else {
             out.println("Please fill in all fields.");
@@ -80,28 +67,9 @@ public class DiakServlet extends HttpServlet {
         String year = request.getParameter("year");
 
         if (password.equals(password2)) {
-            try (Connection conn = DriverManager.getConnection(url, user, this.password);
-                 PreparedStatement stmt = conn.prepareStatement(
-                         "INSERT INTO diak (nev, jelszo, email, szak, kar, egyetem, evfolyam) VALUES (?, ?, ?, ?, ?, ?, ?)")) {
-
-                stmt.setString(1, name);
-                stmt.setString(2, password);
-                stmt.setString(3, email);
-                stmt.setString(4, profile);
-                stmt.setString(5, department);
-                stmt.setString(6, university);
-                stmt.setInt(7, Integer.parseInt(year));
-
-                int rowsInserted = stmt.executeUpdate();
-                if (rowsInserted > 0) {
-                    out.println("Registration successful!");
-                } else {
-                    out.println("Registration failed.");
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-                out.println("Database error: " + e.getMessage());
-            }
+            Diak diak = new Diak(name, password, email, profile, department, university, Integer.parseInt(year));
+            diakDAO.saveDiak(diak);
+            out.println("Registration successful!");
         } else {
             out.println("Passwords do not match.");
         }
