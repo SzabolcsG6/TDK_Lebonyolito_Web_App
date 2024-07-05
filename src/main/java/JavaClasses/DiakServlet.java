@@ -12,6 +12,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.util.HashSet;
 
 @WebServlet("/DiakServlet")
 public class DiakServlet extends HttpServlet {
@@ -46,12 +48,17 @@ public class DiakServlet extends HttpServlet {
         if (email != null && password != null) {
             Diak diak = diakDAO.getDiakByEmailAndPassword(email, password);
             if (diak != null) {
-                out.println("Login successful!");
+                HttpSession session = request.getSession();
+                session.setAttribute("logged_in_user", diak);
+                
+                out.println("Sikeres !");
+                response.sendRedirect("Dolgozatok.jsp");
             } else {
-                out.println("Invalid email or password.");
+                out.println("Helytelen e-mail/jelszó!");
             }
         } else {
-            out.println("Please fill in all fields.");
+            out.println("Mindkét információ szükséges bejelentkezésre!");
+            response.sendRedirect("Jelentkezes.jsp");
         }
     }
 
@@ -69,9 +76,11 @@ public class DiakServlet extends HttpServlet {
         if (password.equals(password2)) {
             Diak diak = new Diak(name, password, email, profile, department, university, Integer.parseInt(year));
             diakDAO.saveDiak(diak);
-            out.println("Registration successful!");
+            out.println("Sikeres regisztráció!");
+            response.sendRedirect("Jelentkezes.jsp");
+            
         } else {
-            out.println("Passwords do not match.");
+            out.println("Nem egyeznek a jelszavak!");
         }
     }
 
@@ -89,6 +98,6 @@ public class DiakServlet extends HttpServlet {
 
     @Override
     public String getServletInfo() {
-        return "Servlet for student registration and login";
+        return "Servlet Diák regisztrálás és belépésre";
     }
 }

@@ -7,19 +7,7 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="JavaClasses.DiakServlet,JavaClasses.AdatbazisKezelo,JavaClasses.Diak,JavaClasses.DiakDAO, java.sql.*, java.io.*, java.util.*" %>
 
-<%
-    String errorMessage = "";
-    String successMessage = "";
 
-    if ("POST".equalsIgnoreCase(request.getMethod())) {
-        String action = request.getParameter("action");
-        if ("register".equalsIgnoreCase(action)) {
-            successMessage = "Registration successful!";
-        } else if ("login".equalsIgnoreCase(action)) {
-            successMessage = "Login successful!";
-        }
-    }
-%>
 <!doctype html>
 <html lang="hu">
 <head>
