@@ -16,6 +16,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DolgozatDAO {
     private final String url = "jdbc:mysql://localhost:3306/mydatabase";
@@ -52,7 +54,58 @@ public class DolgozatDAO {
             e.printStackTrace();
         }
     }
+ public List<Dolgozat> getAllDolgozat() {
+        List<Dolgozat> dolgozatList = new ArrayList<>();
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
+            String sql = "SELECT * FROM Dolgozat";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                ResultSet resultSet = preparedStatement.executeQuery();
+                while (resultSet.next()) {
+                    Dolgozat dolgozat = new Dolgozat(
+                        resultSet.getInt("Dolgozat_Id"),
+                        resultSet.getString("cim"),
+                        resultSet.getString("kategoria"),
+                        resultSet.getString("kivonat"),
+                        resultSet.getString("vezetoTanarok"),
+                        resultSet.getBlob("dolgozatFile"),
+                        resultSet.getBoolean("elfogadva"),
+                        resultSet.getLong("jegy")
+                    );
+                    dolgozatList.add(dolgozat);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return dolgozatList;
+    }
 
+    public List<Dolgozat> getDolgozatByDiakId(int diakId) {
+        List<Dolgozat> dolgozatList = new ArrayList<>();
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
+            String sql = "SELECT d.* FROM Dolgozat d JOIN DolgozatDiak dd ON d.Dolgozat_Id = dd.Dolgozat_Id WHERE dd.Diak_Id = ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                preparedStatement.setInt(1, diakId);
+                ResultSet resultSet = preparedStatement.executeQuery();
+                while (resultSet.next()) {
+                    Dolgozat dolgozat = new Dolgozat(
+                        resultSet.getInt("Dolgozat_Id"),
+                        resultSet.getString("cim"),
+                        resultSet.getString("kategoria"),
+                        resultSet.getString("kivonat"),
+                        resultSet.getString("vezetoTanarok"),
+                        resultSet.getBlob("dolgozatFile"),
+                        resultSet.getBoolean("elfogadva"),
+                        resultSet.getLong("jegy")
+                    );
+                    dolgozatList.add(dolgozat);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return dolgozatList;
+    }
     // Metódus a Dolgozat objektum lekérdezésére azonosító alapján
     public Dolgozat getDolgozatById(int dolgozatId) {
         Dolgozat dolgozat = null;
@@ -120,5 +173,29 @@ public class DolgozatDAO {
             e.printStackTrace();
         }
     }
-    
+    private List<Diak> getSzerzokByDolgozatId(int dolgozatId) {
+        List<Diak> szerzok = new ArrayList<>();
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
+            String sql = "SELECT d.* FROM Diak d JOIN DolgozatDiak dd ON d.Diak_Id = dd.Diak_Id WHERE dd.Dolgozat_Id = ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                preparedStatement.setInt(1, dolgozatId);
+                ResultSet resultSet = preparedStatement.executeQuery();
+                while (resultSet.next()) {
+                    Diak diak = new Diak( 
+                        resultSet.getString("nev"),
+                        resultSet.getString("jelszo"),
+                        resultSet.getString("email"),
+                        resultSet.getString("szak"),
+                        resultSet.getString("kar"),
+                        resultSet.getString("Egyetem"),
+                        resultSet.getInt("evfolyam")
+                    );
+                    szerzok.add(diak);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return szerzok;
+    }
 }

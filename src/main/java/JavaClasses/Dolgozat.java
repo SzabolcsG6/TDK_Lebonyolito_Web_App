@@ -1,70 +1,67 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package JavaClasses;
 
-/**
- *
- * @author misim
- */
 import java.io.File;
-import java.util.ArrayList;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.List;
 
 public class Dolgozat {
-    private List<Diak> szerzok;
     private static int nextDolgozatId = 1; 
     private int DolgozatId;
     private String cim;
     private String kategoria;
     private String kivonat;
     private String vezetoTanarok;
-    private File dolgozatFile;
+   private Blob dolgozatFile;
     private boolean elfogadva;
-     private Long jegy;
+    private Long jegy;
 
-    public Dolgozat(List<Diak> szerzok, String cim, String kategoria, String kivonat, String vezetoTanarok, File dolgozatFile) {
-        this.DolgozatId=nextDolgozatId++;
-        this.szerzok = szerzok;
+    public Dolgozat(int dolgozatId, String cim, String kategoria, String kivonat, String vezetoTanarok, Blob dolgozatFile, boolean elfogadva, Long jegy) {
+        this.DolgozatId = dolgozatId;
+        this.cim = cim;
+        this.kategoria = kategoria;
+        this.kivonat = kivonat;
+        this.vezetoTanarok = vezetoTanarok;
+        this.dolgozatFile = dolgozatFile;
+        this.elfogadva = elfogadva;
+        this.jegy = jegy;
+    }
+
+    public Dolgozat(String cim, String kategoria, String kivonat, String vezetoTanarok, Blob dolgozatFile) {
+        this.DolgozatId = nextDolgozatId++;
         this.cim = cim;
         this.kategoria = kategoria;
         this.kivonat = kivonat;
         this.vezetoTanarok = vezetoTanarok;
         this.dolgozatFile = dolgozatFile;
         this.elfogadva = false; // Alapértelmezetten false
-        this.jegy = 1L;//alapertelmezetten 1
+        this.jegy = 1L; // alapértelmezetten 1
     }
-     public Dolgozat(List<Diak> szerzok, String cim, String kategoria){
-         this.DolgozatId=nextDolgozatId++;
-        this.szerzok = szerzok;
+
+    public Dolgozat(String cim, String kategoria) {
+        this.DolgozatId = nextDolgozatId++;
         this.cim = cim;
         this.kategoria = kategoria;
     }
-    public Dolgozat(){
-        this.DolgozatId=nextDolgozatId++;
-    }
-   
-public int getDolgozatId() {
+public Dolgozat(){
+    
+}
+    public int getDolgozatId() {
         return DolgozatId;
     }
-public void setDolgozatId(int DolgozatId){
-    this.DolgozatId=DolgozatId;
-}
- public Long getJegy() {
+
+    public void setDolgozatId(int DolgozatId) {
+        this.DolgozatId = DolgozatId;
+    }
+
+    public Long getJegy() {
         return jegy;
     }
 
     public void setJegy(Long jegy) {
         this.jegy = jegy;
-    }
-    // Getterek és setterek
-    public List<Diak> getSzerzok() {
-        return szerzok;
-    }
-
-    public void setSzerzok(List<Diak> szerzok) {
-        this.szerzok = szerzok;
     }
 
     public String getCim() {
@@ -99,14 +96,37 @@ public void setDolgozatId(int DolgozatId){
         this.vezetoTanarok = vezetoTanarok;
     }
 
-    public File getDolgozatFile() {
+    public Blob getDolgozatFile() {
         return dolgozatFile;
     }
 
-    public void setDolgozatFile(File dolgozatFile) {
+    public void setDolgozatFile(Blob dolgozatFile) {
         this.dolgozatFile = dolgozatFile;
     }
+ private File createFileFromBlob(Blob blob) throws SQLException {
+        if (blob == null) {
+            return null;
+        }
 
+        File file = null;
+        FileOutputStream outputStream = null;
+        try {
+            file = File.createTempFile("dolgozat", ".tmp");
+            outputStream = new FileOutputStream(file);
+            outputStream.write(blob.getBytes(1, (int) blob.length()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (outputStream != null) {
+                try {
+                    outputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return file;
+    }
     public boolean isElfogadva() {
         return elfogadva;
     }
@@ -114,6 +134,7 @@ public void setDolgozatId(int DolgozatId){
     public void setElfogadva(boolean elfogadva) {
         this.elfogadva = elfogadva;
     }
+
     public static void kiirElfogadottDolgozatok(List<Dolgozat> dolgozatok) {
         for (Dolgozat dolgozat : dolgozatok) {
             if (dolgozat.isElfogadva()) {
@@ -122,7 +143,6 @@ public void setDolgozatId(int DolgozatId){
         }
     }
 
-    // toString metódus felülírása az osztály megfelelő kiírásához
     @Override
     public String toString() {
         return "Dolgozat{" +

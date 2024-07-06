@@ -112,8 +112,7 @@ public class DiakServlet extends HttpServlet {
               out.println("</script>");
             
         } else {
-              out.println("<script type=\"text/javascript\">");
-            out.println("alert('Zsűri tag sikeres bejelentkezés!');");
+              out.println("<script type=\"text/javascript\">");         
             out.println("alert('Nem egyeznek a jelszavak!');");
                 out.println("window.location.href = 'Jelentkezes.jsp';");
                out.println("</script>");
