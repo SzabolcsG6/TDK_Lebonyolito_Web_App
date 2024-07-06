@@ -1,0 +1,29 @@
+<%@ page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="JavaClasses.Diak" %>
+
+<%
+    Diak loggedInUser = (Diak) session.getAttribute("logged_in_user");
+    boolean isLoggedIn = (loggedInUser != null);
+%>
+
+<ul>
+    <li class="<%= isLoggedIn ? "active" : "" %>"><a href="Hirek.jsp">Hírek</a></li>
+    <li><a href="Program.jsp">Program</a></li>
+    <li><a href="Szakosztalyok.jsp">Szakosztályok</a></li>
+    <li><a href="Formai_Kovetelmenyek.jsp">Formai követelmények</a></li>
+    <li><a href="Dokumentumok.jsp">Dokumentumok</a></li> 
+    <li><a href="Archivum.jsp">Archívum</a></li>
+    <li><a href="Ro.jsp">Ro</a></li>
+    <li><a href="Eng.jsp">Eng</a></li>
+    
+    <% if (isLoggedIn) { %>
+        <li><a href="Dolgozatok.jsp">Dolgozatok</a></li>
+        <li style="float: right;">
+            <span style="color:white;">
+                <a style="color:white;" href="Kijelentkezes.jsp">Kijelentkezés</a>
+            </span>
+        </li>
+    <% } else { %>
+        <li><a href="Jelentkezes.jsp">Jelentkezés</a></li>
+    <% } %>
+</ul>

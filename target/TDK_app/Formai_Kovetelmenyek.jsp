@@ -35,22 +35,13 @@ function recap_callback() {
 </head>
 <body>
 		<div class="page-wrapper">
-		
-		<div class="header-container">
-                                                        <div class='logged-in-user'>
-                                    <span style="color:white;">
-                                         <a style="color:white;" href = "https://mtdk.tmd.ro/index.php/site/logout/"></a>
-                                    </span>
-                                </div>
-                                			<div class="header"></div>
+		<div class="header-container">	
+			<div class="header"></div>
 			<div class="menu">
-				<ul>
-				<li><a href="Hirek.jsp" >Hírek</a></li><li><a href="Program.jsp">Program</a></li><li><a href="Szakosztalyok.jsp" >Szakosztályok</a></li><li  class="active"><a href="Formai_Kovetelmenyek.jsp" >Formai követelmények</a></li><li><a href="Dokumentumok.jsp" >Dokumentumok</a></li><li><a href="Jelentkezes.jsp" >Jelentkezés</a></li><li><a href="Archivum.jsp" >Archívum</a></li><li><a href="Ro.jsp" >Ro</a></li><li><a href="Eng.jsp" >Eng</a></li>					
-					<!-- <li class="active"><a href="#" >aktiv menü</a></li> -->
-				</ul>
+				<%@ include file="/WEB-INF/jspf/menu.jspf" %>
 			</div>
 		</div>
-                <div class="content-container">
+		<div class="content-container">
 <div class="content-col content-col-wide">
         <h1>Formai követelmények</h1>
         <h3>A dolgozat formai k&ouml;vetelm&eacute;nyei</h3>

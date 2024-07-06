@@ -42,24 +42,15 @@
     </script>
 </head>
 <body>
-    <div class="page-wrapper">
-        <div class="header-container">
-            <div class="header"></div>
-            <div class="menu">
-                <ul>
-                    <li><a href="Hirek.jsp">Hírek</a></li>
-                    <li><a href="Program.jsp">Program</a></li>
-                    <li><a href="Szakosztalyok.jsp">Szakosztályok</a></li>
-                    <li><a href="Formai_Kovetelmenyek.jsp">Formai követelmények</a></li>
-                    <li><a href="Dokumentumok.jsp">Dokumentumok</a></li>
-                    <li class="active"><a href="Jelentkezes.jsp">Jelentkezés</a></li>
-                    <li><a href="Archivum.jsp">Archívum</a></li>
-                    <li><a href="Ro.jsp">Ro</a></li>
-                    <li><a href="Eng.jsp">Eng</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="content-container">
+ <div class="page-wrapper">
+		<div class="page-wrapper">
+		<div class="header-container">	
+			<div class="header"></div>
+			<div class="menu">
+				<%@ include file="/WEB-INF/jspf/menu.jspf" %>
+			</div>
+		</div>
+		<div class="content-container">
             <div class="content-col">
                 <h1>Jelszó visszaállítás</h1>
                 <form method="post" class="login_form">

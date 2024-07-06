@@ -35,19 +35,15 @@ function recap_callback() {
 </script>
 
 </head>
-<body>
+<body><div class="page-wrapper">
 		<div class="page-wrapper">
-		
-		<div class="header-container">
-                        			<div class="header"></div>
+		<div class="header-container">	
+			<div class="header"></div>
 			<div class="menu">
-				<ul>
-				<li><a href="Hirek.jsp" >Hírek</a></li><li><a href="Program.jsp">Program</a></li><li><a href="Szakosztalyok.jsp" >Szakosztályok</a></li><li><a href="Formai_Kovetelmenyek.jsp" >Formai követelmények</a></li><li><a href="Dokumentumok.jsp" >Dokumentumok</a></li><li><a href="Jelentkezes.jsp" >Jelentkezés</a></li><li><a href="Archivum.jsp" >Archívum</a></li><li class="active"><a href="Ro.jsp" >Ro</a></li><li><a href="Eng.jsp" >Eng</a></li>					
-					<!-- <li class="active"><a href="#" >aktiv menü</a></li> -->
-				</ul>
+				<%@ include file="/WEB-INF/jspf/menu.jspf" %>
 			</div>
 		</div>
-                <div class="content-container">
+		<div class="content-container">
 <div class="content-col content-col-wide">
         <h1>Cea de a XXV-a ediție a Conferinței Cercurilor Studențești din domeniul Științelor Tehnice</h1>
         <p>Scopul conferinței este de a &icirc;ncuraja activitățile științifice și academice ale studenților, de a le oferi oportunitatea să-și prezenta lucrările, de a discuta despre rezultatele preliminare sau finale, despre planurile de cercetare viitoare, precum și de a stabili noi contacte.</p>
