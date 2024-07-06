@@ -9,6 +9,7 @@ package JavaClasses;
  * @author misim
  */
 
+import JavaClasses.Diak;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -48,6 +49,24 @@ public class DiakDAO {
             e.printStackTrace();
         }
     }
+    public boolean isEmailExists(String email) {
+    String sql = "SELECT COUNT(*) FROM diak WHERE email = ?";
+
+    try (Connection conn = DriverManager.getConnection(url, user, password);
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+        stmt.setString(1, email);
+        ResultSet resultSet = stmt.executeQuery();
+        if (resultSet.next()) {
+            return resultSet.getInt(1) > 0;
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    return false;
+}
+
   public Diak getDiakByEmail(String email) {
         Diak diak = null;
         String sql = "SELECT * FROM diak WHERE email = ?";

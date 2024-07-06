@@ -1,5 +1,6 @@
 package JavaClasses;
 
+import JavaClasses.Diak;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -18,6 +19,7 @@ import java.util.HashSet;
 @WebServlet("/DiakServlet")
 public class DiakServlet extends HttpServlet {
     private DiakDAO diakDAO = new DiakDAO();
+    private FelhasznaloDAO felhasznaloDAO = new FelhasznaloDAO();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -46,20 +48,41 @@ public class DiakServlet extends HttpServlet {
         String password = request.getParameter("passw");
 
         if (email != null && password != null) {
+            // Try to login as Diak
             Diak diak = diakDAO.getDiakByEmailAndPassword(email, password);
             if (diak != null) {
                 HttpSession session = request.getSession();
                 session.setAttribute("logged_in_user", diak);
-                
-                out.println("Sikeres !");
-                response.sendRedirect("Dolgozatok.jsp");
-            } else {
-                out.println("Helytelen e-mail/jelszó!");
+               out.println("<script type=\"text/javascript\">");
+            out.println("alert('Diák sikeres bejelentkezés!');");
+            out.println("window.location.href = 'Dolgozatok.jsp';");
+            out.println("</script>");
+                return;
             }
+
+          
+            Felhasznalo felhasznalo = felhasznaloDAO.getFelhasznaloByEmailAndPassword(email, password);
+            if (felhasznalo != null) {
+                HttpSession session = request.getSession();
+                session.setAttribute("logged_in_user", felhasznalo);
+                out.println("<script type=\"text/javascript\">");
+            out.println("alert('Zsűri tag sikeres bejelentkezés!');");
+            out.println("window.location.href = 'DolgozatokZsuri.jsp';");
+            out.println("</script>");
+                return; 
+            }
+
+             out.println("<script type=\"text/javascript\">");
+            out.println("alert('Helytelen e-mail/jelszó!');");
+             out.println("window.location.href = 'Jelentkezes.jsp';");
+            out.println("</script>");
         } else {
-            out.println("Mindkét információ szükséges bejelentkezésre!");
-            response.sendRedirect("Jelentkezes.jsp");
+              out.println("<script type=\"text/javascript\">");
+            out.println("alert('Mindkét információ szükséges bejelentkezéshez!');");
+             out.println("window.location.href = 'Jelentkezes.jsp';");
+            out.println("</script>");
         }
+        response.sendRedirect("Jelentkezes.jsp");
     }
 
     private void handleRegister(HttpServletRequest request, HttpServletResponse response, PrintWriter out)
@@ -73,14 +96,27 @@ public class DiakServlet extends HttpServlet {
         String profile = request.getParameter("profile");
         String year = request.getParameter("year");
 
-        if (password.equals(password2)) {
+        
+        if (diakDAO.isEmailExists(email)) {
+        out.println("<script type=\"text/javascript\">");
+        out.println("alert('Az e-mail cím már használatban van!');");
+        out.println("window.location.href = 'Jelentkezes.jsp';");
+        out.println("</script>");}
+       
+        else if (password.equals(password2)) {
             Diak diak = new Diak(name, password, email, profile, department, university, Integer.parseInt(year));
             diakDAO.saveDiak(diak);
-            out.println("Sikeres regisztráció!");
-            response.sendRedirect("Jelentkezes.jsp");
+              out.println("<script type=\"text/javascript\">");
+              out.println("alert('Diák sikeres regisztráció!');");
+            out.println("window.location.href = 'Jelentkezes.jsp';");
+              out.println("</script>");
             
         } else {
-            out.println("Nem egyeznek a jelszavak!");
+              out.println("<script type=\"text/javascript\">");
+            out.println("alert('Zsűri tag sikeres bejelentkezés!');");
+            out.println("alert('Nem egyeznek a jelszavak!');");
+                out.println("window.location.href = 'Jelentkezes.jsp';");
+               out.println("</script>");
         }
     }
 

@@ -1,5 +1,6 @@
 package JavaClasses;
 
+import JavaClasses.Felhasznalo;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -40,6 +41,34 @@ public class FelhasznaloDAO {
             e.printStackTrace();
         }
     }
+public Felhasznalo getFelhasznaloByEmailAndPassword(String email, String password) {
+    Felhasznalo felhasznalo = null;
+    String sql = "SELECT * FROM felhasznalo WHERE email = ? AND jelszo = ?";
+
+    try (Connection conn = DriverManager.getConnection(url, user, password);
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+        stmt.setString(1, email);
+        stmt.setString(2, password);
+        ResultSet resultSet = stmt.executeQuery();
+
+        if (resultSet.next()) {
+            felhasznalo = new Felhasznalo(
+                    resultSet.getString("nev"),
+                    resultSet.getString("jelszo"),
+                    resultSet.getString("email"),
+                    resultSet.getString("szak"),
+                    resultSet.getString("kar"),
+                    resultSet.getString("egyetem")
+            );
+        }
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    return felhasznalo;
+}
 
     // Metódus a felhasználó objektum lekérdezésére azonosító alapján
     public Felhasznalo getFelhasznaloById(int felhasznaloId) {
@@ -106,5 +135,5 @@ public void updateFelhasznalo(Felhasznalo felhasznalo) {
     }
 }
 
-    // További metódusok hozzáadása: frissítés, törlés, stb.
+
 }

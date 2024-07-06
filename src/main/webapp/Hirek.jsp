@@ -4,7 +4,7 @@
     Author     : misim
 --%>
 
-<%@ page import="JavaClasses.Diak" %>
+
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="hu">
