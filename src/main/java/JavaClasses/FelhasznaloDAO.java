@@ -42,33 +42,42 @@ public class FelhasznaloDAO {
         }
     }
 public Felhasznalo getFelhasznaloByEmailAndPassword(String email, String password) {
-    Felhasznalo felhasznalo = null;
-    String sql = "SELECT * FROM felhasznalo WHERE email = ? AND jelszo = ?";
+        Felhasznalo felhasznalo = null;
+        String sql = "SELECT * FROM felhasznalo WHERE email = ? AND jelszo = ?";
 
-    try (Connection conn = DriverManager.getConnection(url, user, password);
-         PreparedStatement stmt = conn.prepareStatement(sql)) {
+        ResultSet resultSet = null;
+        try (Connection conn = DriverManager.getConnection(url, user, this.password);
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-        stmt.setString(1, email);
-        stmt.setString(2, password);
-        ResultSet resultSet = stmt.executeQuery();
+            stmt.setString(1, email);
+            stmt.setString(2, password);
+            resultSet = stmt.executeQuery();
 
-        if (resultSet.next()) {
-            felhasznalo = new Felhasznalo(
-                    resultSet.getString("nev"),
-                    resultSet.getString("jelszo"),
-                    resultSet.getString("email"),
-                    resultSet.getString("szak"),
-                    resultSet.getString("kar"),
-                    resultSet.getString("egyetem")
-            );
+            if (resultSet.next()) {
+                felhasznalo = new Felhasznalo(
+                        resultSet.getString("nev"),
+                        resultSet.getString("jelszo"),
+                        resultSet.getString("email"),
+                        resultSet.getString("szak"),
+                        resultSet.getString("kar"),
+                        resultSet.getString("egyetem")
+                );
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
-    } catch (SQLException e) {
-        e.printStackTrace();
+        return felhasznalo;
     }
-
-    return felhasznalo;
-}
 
     // Metódus a felhasználó objektum lekérdezésére azonosító alapján
     public Felhasznalo getFelhasznaloById(int felhasznaloId) {
