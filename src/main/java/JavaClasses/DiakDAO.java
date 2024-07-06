@@ -48,7 +48,34 @@ public class DiakDAO {
             e.printStackTrace();
         }
     }
+  public Diak getDiakByEmail(String email) {
+        Diak diak = null;
+        String sql = "SELECT * FROM diak WHERE email = ?";
 
+        try (Connection conn = DriverManager.getConnection(url, user, password);
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, email);
+            ResultSet resultSet = stmt.executeQuery();
+
+            if (resultSet.next()) {
+                diak = new Diak(
+                        resultSet.getString("nev"),
+                        resultSet.getString("jelszo"),
+                        resultSet.getString("email"),
+                        resultSet.getString("szak"),
+                        resultSet.getString("kar"),
+                        resultSet.getString("egyetem"),
+                        resultSet.getInt("evfolyam")
+                );
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return diak;
+    }
     public Diak getDiakByEmailAndPassword(String email, String password) {
         Diak diak = null;
         String sql = "SELECT * FROM diak WHERE email = ? AND jelszo = ?";
@@ -80,7 +107,7 @@ public class DiakDAO {
     }
 
     public void updateDiak(Diak diak) {
-        String sql = "UPDATE diak SET nev = ?, jelszo = ?, email = ?, szak = ?, kar = ?, egyetem = ?, evfolyam = ? WHERE id = ?";
+        String sql = "UPDATE diak SET nev = ?, jelszo = ?, email = ?, szak = ?, kar = ?, egyetem = ?, evfolyam = ? WHERE diak_id = ?";
 
         try (Connection conn = DriverManager.getConnection(url, user, password);
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -92,7 +119,7 @@ public class DiakDAO {
             stmt.setString(5, diak.getKar());
             stmt.setString(6, diak.getEgyetem());
             stmt.setInt(7, diak.getEvfolyam());
-            stmt.setInt(8, diak.getId());
+            stmt.setInt(8, diak.getDiak_id());
 
             stmt.executeUpdate();
 
@@ -102,7 +129,7 @@ public class DiakDAO {
     }
 
     public void deleteDiak(int id) {
-        String sql = "DELETE FROM diak WHERE id = ?";
+        String sql = "DELETE FROM diak WHERE diak_id = ?";
 
         try (Connection conn = DriverManager.getConnection(url, user, password);
              PreparedStatement stmt = conn.prepareStatement(sql)) {

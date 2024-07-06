@@ -53,13 +53,14 @@
 		<div class="content-container">
             <div class="content-col">
                 <h1>Jelszó visszaállítás</h1>
-                <form method="post" class="login_form">
-                    <div class="signup-col">
-                        <label>E-mail cím:</label>
-                        <input type="text" name="mail_passw_res" id="mail_passw_res" style="width:100%;" placeholder="E-mail cím" required />
-                        <input type="submit" value="Jelszó visszaállítás kérés küldése!" class="btn btn-default btn-sm fr" style="margin-top: 10px;" />
-                    </div>
-                </form>
+<form action="JelszoVisszaallitasServlet" method="post">
+    <div class="signup-col">
+        <label>E-mail cím:</label>
+        <input type="text" name="mail_passw_res" id="email" style="width:100%;" placeholder="E-mail cím" required />
+        <input type="submit" value="Jelszó visszaállítás kérés küldése!" class="btn btn-default btn-sm fr" style="margin-top: 10px;" />
+    </div>
+</form>
+
                 <div class="cb"></div>
             </div>
             <div class="cb"></div>

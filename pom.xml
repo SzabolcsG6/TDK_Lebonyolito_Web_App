@@ -26,8 +26,8 @@
     <scope>provided</scope>
 </dependency>
 <dependency>
-        <groupId>jakarta.jstl</groupId>
-        <artifactId>jakarta.jstl-api</artifactId>
+        <groupId>jakarta.jstl</groupId
+>        <artifactId>jakarta.jstl-api</artifactId>
         <version>2.0.0</version>
     </dependency>
     <dependency>
@@ -46,6 +46,7 @@
     <version>5.0.0</version>
 </dependency>
 
+
 <dependency>
     <groupId>org.apache.tomcat</groupId>
     <artifactId>jsp-api</artifactId>
@@ -58,11 +59,22 @@
             <artifactId>jkta</artifactId>
             <version>0.12</version>
             <type>jar</type>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.ws.xmlschema</groupId>
+                    <artifactId>xmlschema-core</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
     <groupId>org.projectlombok</groupId>
     <artifactId>lombok</artifactId>
     <version>1.18.32</version>
+</dependency>
+<dependency>
+    <groupId>com.sun.mail</groupId>
+    <artifactId>jakarta.mail</artifactId>
+    <version>2.0.1</version>
 </dependency>
 
     </dependencies>

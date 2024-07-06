@@ -3,6 +3,7 @@ JavaClasses\DolgozatLista.class
 JavaClasses\DolgozatServlet.class
 JavaClasses\DiakServlet.class
 Entities\Felhasznalo.class
+JavaClasses\JelszoVisszaallitasServlet.class
 com\mycompany\tdk_lebonyolito_web_app\JakartaRestConfiguration.class
 JavaClasses\Dolgozat.class
 Entities\Dolgozat.class
@@ -12,6 +13,7 @@ JavaClasses\AdatbazisKezelo.class
 JavaClasses\DolgozatDAO.class
 JavaClasses\Felhasznalo.class
 JavaClasses\Diak.class
+JavaClasses\JelszoVisszaallitasServlet$1.class
 JavaClasses\JelszoTitkositas.class
 JavaClasses\DiakDAO.class
 JavaClasses\FelhasznaloDAO.class

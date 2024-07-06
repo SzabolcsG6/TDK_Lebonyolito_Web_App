@@ -119,5 +119,5 @@ public class DolgozatDAO {
             e.printStackTrace();
         }
     }
-    // További metódusok hozzáadása: frissítés, törlés, stb.
+    
 }
