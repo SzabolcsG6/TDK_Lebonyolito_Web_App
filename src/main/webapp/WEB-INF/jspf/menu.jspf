@@ -1,13 +1,15 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page import="JavaClasses.Diak" %>
+<%@ page import="JavaClasses.Diak, JavaClasses.Felhasznalo" %>
 
 <%
     Diak loggedInUser = (Diak) session.getAttribute("logged_in_user");
-    boolean isLoggedIn = (loggedInUser != null);
+    Felhasznalo loggedInFelhasznalo = (Felhasznalo) session.getAttribute("logged_in_felhasznalo");
+    boolean isLoggedInUser = (loggedInUser != null);
+    boolean isLoggedInFelhasznalo = (loggedInFelhasznalo != null);
 %>
 
 <ul>
-    <li class="<%= isLoggedIn ? "active" : "" %>"><a href="Hirek.jsp">Hírek</a></li>
+    <li class="<%= isLoggedInUser ? "active" : "" %>"><a href="Hirek.jsp">Hírek</a></li>
     <li><a href="Program.jsp">Program</a></li>
     <li><a href="Szakosztalyok.jsp">Szakosztályok</a></li>
     <li><a href="Formai_Kovetelmenyek.jsp">Formai követelmények</a></li>
@@ -16,8 +18,15 @@
     <li><a href="Ro.jsp">Ro</a></li>
     <li><a href="Eng.jsp">Eng</a></li>
     
-    <% if (isLoggedIn) { %>
+    <% if (isLoggedInUser) { %>
         <li><a href="Dolgozatok.jsp">Dolgozatok</a></li>
+        <li style="float: right;">
+            <span style="color:white;">
+                <a style="color:white;" href="Kijelentkezes.jsp">Kijelentkezés</a>
+            </span>
+        </li>
+    <% } else if (isLoggedInFelhasznalo) { %>
+        <li><a href="Biralatok.jsp">Bírálatok</a></li>
         <li style="float: right;">
             <span style="color:white;">
                 <a style="color:white;" href="Kijelentkezes.jsp">Kijelentkezés</a>

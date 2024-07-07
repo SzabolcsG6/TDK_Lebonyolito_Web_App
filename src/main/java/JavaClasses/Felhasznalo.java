@@ -1,5 +1,7 @@
 package JavaClasses;
 
+import JavaClasses.TobbFunkciok.JelszoTitkositas;
+
 public class Felhasznalo {
     private static int nextId = 1; 
     private int id;

@@ -1,6 +1,4 @@
 JavaClasses\DolgozatDiakDAO.class
-JavaClasses\FelhasznaloLista.class
-JavaClasses\DolgozatLista.class
 JavaClasses\DolgozatServlet.class
 JavaClasses\DiakServlet.class
 Entities\Felhasznalo.class
@@ -9,14 +7,16 @@ com\mycompany\tdk_lebonyolito_web_app\JakartaRestConfiguration.class
 JavaClasses\Dolgozat.class
 Entities\Dolgozat.class
 com\mycompany\tdk_lebonyolito_web_app\resources\JakartaEE10Resource.class
+JavaClasses\TobbFunkciok\FelhasznaloLista.class
+JavaClasses\TobbFunkciok\Regisztralas.class
 Entities\Diak.class
+JavaClasses\TobbFunkciok\JelszoTitkositas.class
 JavaClasses\FelhasznaloServlet.class
 JavaClasses\AdatbazisKezelo.class
 JavaClasses\DolgozatDAO.class
+JavaClasses\TobbFunkciok\DolgozatLista.class
 JavaClasses\Felhasznalo.class
 JavaClasses\Diak.class
 JavaClasses\JelszoVisszaallitasServlet$1.class
-JavaClasses\JelszoTitkositas.class
 JavaClasses\DiakDAO.class
 JavaClasses\FelhasznaloDAO.class
-JavaClasses\Regisztralas.class

@@ -64,10 +64,10 @@ public class DiakServlet extends HttpServlet {
             Felhasznalo felhasznalo = felhasznaloDAO.getFelhasznaloByEmailAndPassword(email, password);
             if (felhasznalo != null) {
                 HttpSession session = request.getSession();
-                session.setAttribute("logged_in_user", felhasznalo);
+                session.setAttribute("logged_in_felhasznalo", felhasznalo);
                 out.println("<script type=\"text/javascript\">");
             out.println("alert('Zsűri tag sikeres bejelentkezés!');");
-            out.println("window.location.href = 'DolgozatokZsuri.jsp';");
+            out.println("window.location.href = 'Biralatok.jsp';");
             out.println("</script>");
                 return; 
             }
