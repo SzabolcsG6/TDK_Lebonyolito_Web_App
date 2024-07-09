@@ -53,6 +53,7 @@ public class DiakServlet extends HttpServlet {
             if (diak != null) {
                 HttpSession session = request.getSession();
                 session.setAttribute("logged_in_user", diak);
+                session.setAttribute("diak_id", diak.getDiak_id());
                out.println("<script type=\"text/javascript\">");
             out.println("alert('Diák sikeres bejelentkezés!');");
             out.println("window.location.href = 'Dolgozatok.jsp';");
@@ -65,6 +66,7 @@ public class DiakServlet extends HttpServlet {
             if (felhasznalo != null) {
                 HttpSession session = request.getSession();
                 session.setAttribute("logged_in_felhasznalo", felhasznalo);
+                  session.setAttribute("id", felhasznalo.getId());
                 out.println("<script type=\"text/javascript\">");
             out.println("alert('Zsűri tag sikeres bejelentkezés!');");
             out.println("window.location.href = 'Biralatok.jsp';");

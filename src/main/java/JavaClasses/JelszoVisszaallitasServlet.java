@@ -45,7 +45,7 @@ public class JelszoVisszaallitasServlet extends HttpServlet {
                 sendPasswordResetEmail(diak.getEmail(), newPassword);
                 
                 out.println("Jelszó visszaállítása sikeres! Ellenőrizze e-mail fiókját.");
-                response.sendRedirect("JelszoVisszaallitas.jsp"); // Redirect to a success page or back to the form
+                response.sendRedirect("Jelentkezes.jsp"); // Redirect to a success page or back to the form
             } else {
                 out.println("Nem található felhasználó ezzel az e-mail címmel!");
             }
@@ -69,17 +69,17 @@ public class JelszoVisszaallitasServlet extends HttpServlet {
 
     private void sendPasswordResetEmail(String email, String newPassword) {
     // SMTP server information
-    String from = "szabolcs.g38@gmail.com";
-    String host = "mail.smtp2go.com"; // Replace with your SMTP server host
-    final String username = "g_szabolcs@fastmail.com"; // SMTP username
-    final String password = "JGaOfOiG9RahFWqg"; // SMTP password
+    String from = " ";
+    String host = "level.ms.sapientia.ro"; // Replace with your SMTP server host static
+    final String username = "domi@ms.sapientia.ro"; // SMTP username
+    final String password = "azleszagyoztes"; // SMTP password
 
     // Set up the SMTP properties
     Properties properties = new Properties();
     properties.put("mail.smtp.auth", "true");
     properties.put("mail.smtp.starttls.enable", "true"); // Enable TLS
     properties.put("mail.smtp.host", host);
-    properties.put("mail.smtp.port", "587"); // SMTP port (TLS)
+    properties.put("mail.smtp.port", "465"); // SMTP port (TLS)
 
     // Create a session with the specified properties and authenticator
     Session session = Session.getInstance(properties, new Authenticator() {

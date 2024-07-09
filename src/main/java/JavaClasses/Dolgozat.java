@@ -8,13 +8,14 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class Dolgozat {
-    private static int nextDolgozatId = 1; 
+
+    private static int nextDolgozatId = 1;
     private int DolgozatId;
     private String cim;
     private String kategoria;
     private String kivonat;
     private String vezetoTanarok;
-   private Blob dolgozatFile;
+    private Blob dolgozatFile;
     private boolean elfogadva;
     private Long jegy;
 
@@ -45,9 +46,11 @@ public class Dolgozat {
         this.cim = cim;
         this.kategoria = kategoria;
     }
-public Dolgozat(){
-    
-}
+
+    public Dolgozat() {
+
+    }
+
     public int getDolgozatId() {
         return DolgozatId;
     }
@@ -103,30 +106,39 @@ public Dolgozat(){
     public void setDolgozatFile(Blob dolgozatFile) {
         this.dolgozatFile = dolgozatFile;
     }
- private File createFileFromBlob(Blob blob) throws SQLException {
-        if (blob == null) {
+
+    private File createFileFromBlob(Blob blob) throws SQLException {
+        if (blob == null)
+        {
             return null;
         }
 
         File file = null;
         FileOutputStream outputStream = null;
-        try {
+        try
+        {
             file = File.createTempFile("dolgozat", ".tmp");
             outputStream = new FileOutputStream(file);
             outputStream.write(blob.getBytes(1, (int) blob.length()));
-        } catch (IOException e) {
+        } catch (IOException e)
+        {
             e.printStackTrace();
-        } finally {
-            if (outputStream != null) {
-                try {
+        } finally
+        {
+            if (outputStream != null)
+            {
+                try
+                {
                     outputStream.close();
-                } catch (IOException e) {
+                } catch (IOException e)
+                {
                     e.printStackTrace();
                 }
             }
         }
         return file;
     }
+
     public boolean isElfogadva() {
         return elfogadva;
     }
@@ -136,8 +148,10 @@ public Dolgozat(){
     }
 
     public static void kiirElfogadottDolgozatok(List<Dolgozat> dolgozatok) {
-        for (Dolgozat dolgozat : dolgozatok) {
-            if (dolgozat.isElfogadva()) {
+        for (Dolgozat dolgozat : dolgozatok)
+        {
+            if (dolgozat.isElfogadva())
+            {
                 System.out.println(dolgozat);
             }
         }
@@ -145,10 +159,10 @@ public Dolgozat(){
 
     @Override
     public String toString() {
-        return "Dolgozat{" +
-                "cim='" + cim + '\'' +
-                ", kategoria='" + kategoria + '\'' +
-                ", elfogadva=" + elfogadva +
-                '}';
+        return "Dolgozat{"
+                + "cim='" + cim + '\''
+                + ", kategoria='" + kategoria + '\''
+                + ", elfogadva=" + elfogadva
+                + '}';
     }
 }

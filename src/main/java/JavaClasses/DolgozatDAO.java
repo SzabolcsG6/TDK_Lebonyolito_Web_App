@@ -146,8 +146,9 @@ public class DolgozatDAO {
             stmt.setString(2, dolgozat.getKategoria());
             stmt.setString(3, dolgozat.getKivonat());
             stmt.setString(4, dolgozat.getVezetoTanarok());
-            stmt.setLong(5, dolgozat.getJegy());
-            stmt.setInt(6, dolgozat.getDolgozatId());
+             stmt.setBlob(5, dolgozat.getDolgozatFile());
+            stmt.setLong(6, dolgozat.getJegy());
+            stmt.setInt(7, dolgozat.getDolgozatId());
 
             // Frissítés végrehajtása
             stmt.executeUpdate();

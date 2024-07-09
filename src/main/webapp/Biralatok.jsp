@@ -4,6 +4,7 @@
     Author     : misim
 --%>
 
+<%@page import="JavaClasses.DolgozatDiakDAO"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.DriverManager"%>
@@ -105,34 +106,37 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <%
-                    try {
-                        Class.forName("com.mysql.jdbc.Driver");
-                        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydatabase", "root", "xR26.BDezso");
-                        Statement statement = conn.createStatement();
-                        String Dolgozatok = "select * from Dolgozat";
-                        ResultSet rs = statement.executeQuery(Dolgozatok);
-                        while (rs.next()) {
-                        int dolgozatId=rs.getInt("Dolgozat_Id");
-                    %>
-                    <tr>
-                        <td><%= rs.getInt("Dolgozat_Id") %></td>
-                        <td><%= rs.getString("cim") %></td>
-                        <td><%= rs.getString("kategoria") %></td>
-                        <td><%= rs.getString("vezetoTanarok") %></td>
-                        <td><%= rs.getBoolean("elfogadva") ? "Igen" : "Nem" %></td>
-                        <td><%= rs.getInt("jegy") %></td>
-                    </tr>
-                    <%
-                        }
-                        rs.close();
-                        statement.close();
-                        conn.close();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    %>
-                </tbody>
+                         <% 
+                Integer diakId = (Integer) session.getAttribute("id");
+                List<Integer> dolgozatIds = DolgozatDiakDAO.getDolgozatIdsByFelhasznaloId(diakId);
+for (Integer dolgozatId : dolgozatIds) {
+    Dolgozat dolgozat = DolgozatDiakDAO.getDolgozatById(dolgozatId);
+    System.out.println("Dolgozat: " + dolgozat);
+}
+                if (dolgozatIds == null || dolgozatIds.isEmpty()) {
+            %>
+                <tr>
+                    <td colspan="6">Nincs elérhet? dolgozat.</td>
+                </tr>
+            <% } else {
+                    for (int i = 0; i < dolgozatIds.size(); i++) {
+                                Integer dolgozatId = dolgozatIds.get(i);
+                                Dolgozat dolgozat = DolgozatDiakDAO.getDolgozatById(dolgozatId);
+                                if (dolgozat != null) {
+            %>
+                <tr>
+                    <td><%= dolgozat.getDolgozatId() %></td>
+                    <td><%= dolgozat.getCim() %></td>
+                    <td><%= dolgozat.getKategoria() %></td>
+                    <td><%= dolgozat.getVezetoTanarok() %></td>
+                    <td><%= dolgozat.isElfogadva() ? "Igen" : "Nem" %></td>
+                    <td><%= dolgozat.getJegy() %></td>
+                </tr>
+            <%         }
+                   }
+                }
+            %>
+        </tbody>
             </table>
         </div>
         
