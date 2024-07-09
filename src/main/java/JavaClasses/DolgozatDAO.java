@@ -16,6 +16,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,26 +35,44 @@ public class DolgozatDAO {
     }
 
     // Metódus a Dolgozat objektum beszúrására az adatbázisba
-    public void saveDolgozat(Dolgozat dolgozat) {
-        String sql = "INSERT INTO dolgozat (cim, kategoria, kivonat, vezetoTanarok, jegy) VALUES (?, ?, ?, ?, ?)";
+  public int saveDolgozat(Dolgozat dolgozat) {
+    String sql = "INSERT INTO dolgozat (cim, kategoria, kivonat, vezetoTanarok, jegy) VALUES (?, ?, ?, ?, ?)";
 
-        try (Connection conn = DriverManager.getConnection(url, user, password);
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+    int generatedId = -1; // Alapértelmezett érték, ha valami hiba történik
 
-            // Adatok beállítása a prepared statement segítségével
-            stmt.setString(1, dolgozat.getCim());
-            stmt.setString(2, dolgozat.getKategoria());
-            stmt.setString(3, dolgozat.getKivonat());
-            stmt.setString(4, dolgozat.getVezetoTanarok());
-            stmt.setLong(5, dolgozat.getJegy());
+    try (Connection conn = DriverManager.getConnection(url, user, password);
+         PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-            // Beszúrás végrehajtása
-            stmt.executeUpdate();
+        // Adatok beállítása a prepared statement segítségével
+        stmt.setString(1, dolgozat.getCim());
+        stmt.setString(2, dolgozat.getKategoria());
+        stmt.setString(3, dolgozat.getKivonat());
+        stmt.setString(4, dolgozat.getVezetoTanarok());
+        stmt.setLong(5, dolgozat.getJegy());
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+        // Beszúrás végrehajtása
+        int affectedRows = stmt.executeUpdate();
+
+        if (affectedRows > 0) {
+            try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    generatedId = generatedKeys.getInt(1); // Az új beszúrt sor azonosítója
+                } else {
+                    throw new SQLException("Nem sikerült az új azonosító lekérése.");
+                }
+            }
         }
+
+    } catch (SQLException e) {
+        e.printStackTrace();
     }
+
+    // Új funkció hívása a saveDolgozat után, például:
+    // performAfterSaveActions();
+
+    return generatedId; // Visszaadjuk az új beszúrt sor azonosítóját
+}
+
  public List<Dolgozat> getAllDolgozat() {
         List<Dolgozat> dolgozatList = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(url, user, password)) {

@@ -128,8 +128,14 @@ for (Integer dolgozatId : dolgozatIds) {
                    }
                 }
             %>
+             <tr>
+                        <td colspan="6">
+                            <a href="UjDolgozat.jsp">Új Dolgozat Létrehozása</a>
+                        </td>
+                    </tr>
         </tbody>
             </table>
+             
         </div>
 
         <div class="footer-container">

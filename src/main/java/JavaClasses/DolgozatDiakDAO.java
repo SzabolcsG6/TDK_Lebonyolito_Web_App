@@ -35,20 +35,20 @@ public class DolgozatDiakDAO {
 
     // Metódus a diák dolgozatok beszúrására az adatbázisba
     public void addDolgozatDiak(int dolgozatId, int diakId) {
-        String sql = "INSERT INTO DolgozatDiak (Dolgozat_Id, Diak_Id) VALUES (?, ?)";
+    String sql = "INSERT INTO DolgozatDiak (Dolgozat_Id, Diak_Id) VALUES (?, ?)";
 
-        try (Connection conn = DriverManager.getConnection(url, user, password); PreparedStatement stmt = conn.prepareStatement(sql))
-        {
+    try (Connection conn = DriverManager.getConnection(url, user, password);
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setInt(1, dolgozatId);
-            stmt.setInt(2, diakId);
-            stmt.executeUpdate();
+        stmt.setInt(1, dolgozatId);
+        stmt.setInt(2, diakId);
+        stmt.executeUpdate();
 
-        } catch (SQLException e)
-        {
-            e.printStackTrace();
-        }
+    } catch (SQLException e) {
+        e.printStackTrace();
     }
+}
+
 
     // Metódus a diák dolgozatok lekérdezésére az adatbázisból
       public static List<Integer> getDolgozatIdsByDiakId(int diakId) {

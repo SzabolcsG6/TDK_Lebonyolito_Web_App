@@ -1,4 +1,4 @@
-<%@ page import="JavaClasses.DolgozatDiakDAO,JavaClasses.Dolgozat,JavaClasses.DiakServlet,JavaClasses.DolgozatDAO,JavaClasses.DolgozatDAO,java.util.List,java.util.ArrayList" %>
+<%@ page import="JavaClasses.DolgozatDiakDAO,JavaClasses.Dolgozat,JavaClasses.DolgozatServlet,JavaClasses.DiakServlet,JavaClasses.DolgozatDAO,JavaClasses.DolgozatDAO,java.util.List,java.util.ArrayList" %>
 <!doctype html>
 <html lang="hu">
 <head>
@@ -69,73 +69,20 @@
     </script>
 </head>
 <body>
-    <div class="page-wrapper">
-        <div class="header-container">    
-            <div class="header"></div>
-            <div class="menu">
-                <%@ include file="/WEB-INF/jspf/menu.jspf" %>
-            </div>
+      <div class="content-container">
+        <form action="DolgozatServlet" method="post" enctype="multipart/form-data">
+            <input type="text" name="cim" placeholder="Cím"><br>
+            <input type="text" name="kategoria" placeholder="Kategória"><br>
+            <input type="text" name="vezetoTanarok" placeholder="Vezet? tanárok"><br>
+            <input type="file" name="file"><br>
+            <button type="submit">Mentés</button>
+        </form>
         </div>
 
         <div class="content-container">
-            <h1>Dolgozatok Listája</h1>
-            <a href="https://drive.google.com/drive/folders/1s6EJJln9msU2uqRr7jJEstvdewXqgc8x" target="_blank">Kivonatok és Projektek</a>
-           <table border="1" id="dolgozatokTable">
-                <thead>
-                    <tr>
-                        <th onclick="sortTable(0)">ID</th>
-                        <th onclick="sortTable(1)">Cím</th>
-                        <th onclick="sortTable(2)">Kategória</th>
-                        <th onclick="sortTable(3)">Vezet? Tanárok</th>
-                        <th onclick="sortTable(4)">Elfogadva</th>
-                        <th onclick="sortTable(5)">Jegy</th>
-                    </tr>
-                </thead>
-                 <tbody>
-            <% 
-                Integer diakId = (Integer) session.getAttribute("diak_id");
-                List<Integer> dolgozatIds = DolgozatDiakDAO.getDolgozatIdsByDiakId(diakId);
-     // out.println("<script>alert('Diak ID: " + diakId + "');</script>");
             
-//              out.println("<script type=\"text/javascript\">");
-//            out.println("alert('Dolgozat IDs: ');"+dolgozatIds);
-//             out.println("window.location.href = 'Dolgozatok.jsp';");
-//            out.println("</script>");
-for (Integer dolgozatId : dolgozatIds) {
-    Dolgozat dolgozat = DolgozatDiakDAO.getDolgozatById(dolgozatId);
-    System.out.println("Dolgozat: " + dolgozat);
-}
-                if (dolgozatIds == null || dolgozatIds.isEmpty()) {
-            %>
-                <tr>
-                    <td colspan="6">Nincs elérhet? dolgozat.</td>
-                </tr>
-            <% } else {
-                    for (int i = 0; i < dolgozatIds.size(); i++) {
-                                Integer dolgozatId = dolgozatIds.get(i);
-                                Dolgozat dolgozat = DolgozatDiakDAO.getDolgozatById(dolgozatId);
-                                if (dolgozat != null) {
-            %>
-                <tr>
-                    <td><%= dolgozat.getDolgozatId() %></td>
-                    <td><%= dolgozat.getCim() %></td>
-                    <td><%= dolgozat.getKategoria() %></td>
-                    <td><%= dolgozat.getVezetoTanarok() %></td>
-                    <td><%= dolgozat.isElfogadva() ? "Igen" : "Nem" %></td>
-                    <td><%= dolgozat.getJegy() %></td>
-                </tr>
-            <%         }
-                   }
-                }
-            %>
-             <tr>
-                        <td colspan="6">
-                            <a href="UjDolgozat.jsp">Új Dolgozat Létrehozása</a>
-                        </td>
-                    </tr>
-        </tbody>
-            </table>
-             
+            <a href="https://drive.google.com/drive/folders/1s6EJJln9msU2uqRr7jJEstvdewXqgc8x" target="_blank">Kivonatok és Projektek</a>
+           
         </div>
 
         <div class="footer-container">
