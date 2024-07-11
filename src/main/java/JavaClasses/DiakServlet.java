@@ -54,7 +54,8 @@ public class DiakServlet extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("logged_in_user", diak);
                 session.setAttribute("diak_id", diak.getDiak_id());
-               out.println("<script type=\"text/javascript\">");
+               System.out.println("Diak ID beállítva a session-ben: " + diak.getDiak_id());
+            out.println("<script type=\"text/javascript\">");
             out.println("alert('Diák sikeres bejelentkezés!');");
             out.println("window.location.href = 'Dolgozatok.jsp';");
             out.println("</script>");

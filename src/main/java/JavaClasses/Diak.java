@@ -21,6 +21,16 @@ public class Diak {
         this.egyetem = egyetem;
         this.evfolyam = evfolyam;
     }
+     public Diak(int Diak_id,String nev, String jelszo, String email, String szak, String kar, String egyetem, int evfolyam) {
+        this.Diak_id = Diak_id; // Diak_id inicializálása
+        this.nev = nev;
+        this.jelszo = jelszo;
+        this.email = email;
+        this.szak = szak;
+        this.kar = kar;
+        this.egyetem = egyetem;
+        this.evfolyam = evfolyam;
+    }
 
     // Getter és setter a Diak_id változóhoz
     public int getDiak_id() {

@@ -97,10 +97,10 @@
                 List<Integer> dolgozatIds = DolgozatDiakDAO.getDolgozatIdsByDiakId(diakId);
      // out.println("<script>alert('Diak ID: " + diakId + "');</script>");
             
-//              out.println("<script type=\"text/javascript\">");
-//            out.println("alert('Dolgozat IDs: ');"+dolgozatIds);
-//             out.println("window.location.href = 'Dolgozatok.jsp';");
-//            out.println("</script>");
+              out.println("<script type=\"text/javascript\">");
+           out.println("alert('Dolgozat IDs: '+ 'diakId');"+dolgozatIds+diakId);
+             out.println("window.location.href = 'Dolgozatok.jsp';");
+            out.println("</script>");
 for (Integer dolgozatId : dolgozatIds) {
     Dolgozat dolgozat = DolgozatDiakDAO.getDolgozatById(dolgozatId);
     System.out.println("Dolgozat: " + dolgozat);

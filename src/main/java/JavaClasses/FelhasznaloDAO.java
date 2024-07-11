@@ -55,6 +55,7 @@ public Felhasznalo getFelhasznaloByEmailAndPassword(String email, String passwor
 
             if (resultSet.next()) {
                 felhasznalo = new Felhasznalo(
+                        resultSet.getInt("id"),
                         resultSet.getString("nev"),
                         resultSet.getString("jelszo"),
                         resultSet.getString("email"),

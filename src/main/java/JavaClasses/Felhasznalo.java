@@ -22,6 +22,16 @@ public class Felhasznalo {
         this.Egyetem = Egyetem;
         
     }
+    public Felhasznalo(int id,String nev, String jelszo, String email, String szak, String kar, String Egyetem) {
+        this.id = id;
+        this.nev = nev;
+        this.jelszo = jelszo;
+        this.email = email;
+        this.szak = szak;
+        this.kar = kar;
+        this.Egyetem = Egyetem;
+        
+    }
 
     // Getterek és setterek az id változóhoz
     public int getId() {

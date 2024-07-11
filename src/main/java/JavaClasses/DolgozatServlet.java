@@ -29,21 +29,24 @@ public class DolgozatServlet extends HttpServlet {
             throws ServletException, IOException {
         int diakId = getLoggedInDiakId(request);
 
-        DolgozatDiakDAO dolgozatDiakDAO = new DolgozatDiakDAO();
-        List<Integer> dolgozatIds = dolgozatDiakDAO.getDolgozatIdsByDiakId(diakId);
+      //  DolgozatDiakDAO dolgozatDiakDAO = new DolgozatDiakDAO();
+        List<Integer> dolgozatIds = DolgozatDiakDAO.getDolgozatIdsByDiakId(diakId);
 
         DolgozatDAO dolgozatDAO = new DolgozatDAO();
         List<Dolgozat> dolgozatList = new ArrayList<>();
 
-        for (int dolgozatId : dolgozatIds) {
-            Dolgozat dolgozat = dolgozatDAO.getDolgozatById(dolgozatId);
+        for (int dolgozat_Id : dolgozatIds) {
+            Dolgozat dolgozat = dolgozatDAO.getDolgozatById(dolgozat_Id);
             if (dolgozat != null) {
+                System.out.println("Lekért Dolgozat ID: " + dolgozat_Id);
+System.out.println("Diák ID: " + diakId);
                 dolgozatList.add(dolgozat);
             }
         }
 
+
         request.setAttribute("dolgozatList", dolgozatList);
-        request.setAttribute("diakId", diakId);
+     //   request.setAttribute("diakId", diakId);
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
@@ -92,8 +95,10 @@ public class DolgozatServlet extends HttpServlet {
         HttpSession session = request.getSession();
         Object diakIdObj = session.getAttribute("diak_id");
         if (diakIdObj != null) {
+            System.out.println("Diak ID a session-ben: " + (Integer)diakIdObj);
             return (Integer) diakIdObj; // Biztonságos típuskonverzió
         } else {
+              System.out.println("Nem került meg az illető diak_id");
             return 0; // Vagy egyéb alapérték, ha nincs bejelentkezve diák
         }
     }

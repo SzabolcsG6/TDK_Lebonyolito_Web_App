@@ -108,6 +108,7 @@ public class DiakDAO {
 
             if (resultSet.next()) {
                 diak = new Diak(
+                        resultSet.getInt("diak_id"),
                         resultSet.getString("nev"),
                         resultSet.getString("jelszo"),
                         resultSet.getString("email"),

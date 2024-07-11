@@ -63,7 +63,7 @@ public class DolgozatDiakDAO {
 
         while (resultSet.next()) {
             int dolgozatId = resultSet.getInt("Dolgozat_Id");
-            //System.out.println("Found DolgozatId: " + dolgozatId); // Debugging line
+           
             dolgozatIds.add(dolgozatId);
         }
 
@@ -114,10 +114,10 @@ public static Dolgozat getDolgozatById(int dolgozatId) {
             dolgozat.setElfogadva(resultSet.getBoolean("elfogadva"));
             dolgozat.setJegy(resultSet.getLong("jegy"));
             
-            // Debugging line
-            System.out.println("Retrieved Dolgozat: " + dolgozat);
+           
+            System.out.println("Megkapott dolgozat: " + dolgozat);
         } else {
-            System.out.println("No Dolgozat found for ID: " + dolgozatId); // Debugging line
+            System.out.println("Nincs dolgozat ilyen Id-vel: " + dolgozatId); 
         }
 
     } catch (SQLException e) {

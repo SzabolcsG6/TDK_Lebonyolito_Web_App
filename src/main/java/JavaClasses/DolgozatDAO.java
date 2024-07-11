@@ -128,7 +128,7 @@ public class DolgozatDAO {
     // Metódus a Dolgozat objektum lekérdezésére azonosító alapján
     public Dolgozat getDolgozatById(int dolgozatId) {
         Dolgozat dolgozat = null;
-        String sql = "SELECT * FROM dolgozat WHERE DolgozatId = ?";
+        String sql = "SELECT * FROM dolgozat WHERE Dolgozat_Id = ?";
 
         try (Connection conn = DriverManager.getConnection(url, user, password);
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -139,7 +139,7 @@ public class DolgozatDAO {
             // Ha van találat, létrehozunk egy Dolgozat objektumot és beállítjuk az attribútumokat
             if (resultSet.next()) {
                 dolgozat = new Dolgozat();
-                dolgozat.setDolgozatId(resultSet.getInt("DolgozatId"));
+                dolgozat.setDolgozatId(resultSet.getInt("Dolgozat_Id"));
                 dolgozat.setCim(resultSet.getString("cim"));
                 dolgozat.setKategoria(resultSet.getString("kategoria"));
                 dolgozat.setKivonat(resultSet.getString("kivonat"));
